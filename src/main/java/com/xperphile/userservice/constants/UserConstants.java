@@ -28,4 +28,8 @@ public class UserConstants {
 
     public static final String DELIMITER = ",";
 
+    public static final String MESSAGE_TO_MAPPING_FILE = "message_to_mapping.json";
+    public static final String USERMESSAGE_TO_FUNNELMESSAGE_FILE = "usermessage_to_funnelmessage.json";
+    public static final String USERMESSAGE_TO_FUNNELMETHOD_FILE = "usermessage_to_funnelmethod.json";
+
 }
