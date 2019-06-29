@@ -66,7 +66,7 @@ public class UserManagementController {
     }
 
     @PostMapping(UserConstants.BLOCK_USER)
-    public ResponseEntity block(@PathVariable("user_id") String user_id, @PathVariable("blocked_id") String blocked_id){
+    public ResponseEntity block(@PathVariable("user_id") String user_id, @PathVariable("block_id") String blocked_id){
         try{
             userManagementService.block(user_id, blocked_id);
             return new ResponseEntity(HttpStatus.ACCEPTED);

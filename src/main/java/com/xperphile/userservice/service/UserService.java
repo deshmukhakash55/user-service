@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,9 @@ public class UserService {
             throw new IllegalArgumentException("Illegal Last Name");
         if(gender == null || gender.isEmpty())
             throw new IllegalArgumentException("Illegal Gender");
+        User tmpUser = userRepository.findByEmail(email);
+        if(null != tmpUser)
+            throw new IllegalArgumentException("User with same email already exists");
         String id = UUID.randomUUID().toString();
         String fav_id = UUID.randomUUID().toString();
         Timestamp creation_date =  new Timestamp(new Date().getTime());
@@ -69,6 +73,7 @@ public class UserService {
         User user = new User(id, username, email, profile_pic, base_pic, country, state, pin_code, address, mobile, first_name, middle_name, last_name, gender, new BigInteger("0"),creation_date, last_modified_date);
         UserFav userFav = new UserFav(fav_id, id, "", "", "", "", "", "", "", creation_date);
         userRepository.save(user);
+        userFavRepository.save(userFav);
     }
 
     public void updateUser (Map<String, String> map) throws IllegalArgumentException{
@@ -85,10 +90,10 @@ public class UserService {
         String middle_name = map.get("middle_name");
         String last_name = map.get("last_name");
         String gender = map.get("gender");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date creation_date_object = null;
         try{
-            creation_date_object = simpleDateFormat.parse(map.get("creation_date"));
+            creation_date_object = simpleDateFormat.parse(map.get("creation_time"));
         }
         catch (ParseException exception){
             throw new IllegalArgumentException("Illegal creation_date");
@@ -136,7 +141,7 @@ public class UserService {
         userRepository.deleteById(id);
         userFavRepository.deleteByUser_Id(id);
         userBlockRepository.deleteByUser_Id(id);
-        userBlockRepository.deleteByFollower_Id(id);
+        userBlockRepository.deleteByBlocked_Id(id);
         userFollowerRepository.deleteByUser_Id(id);
         userFollowerRepository.deleteByFollower_Id(id);
         userMessagesRepository.deleteByMessager_Id(id);

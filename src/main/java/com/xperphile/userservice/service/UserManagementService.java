@@ -122,7 +122,7 @@ public class UserManagementService {
         if(fav_key == null || fav_key.isEmpty())
             throw new IllegalArgumentException("Illegal fav_key");
         if(fav_value == null || fav_value.isEmpty())
-            throw new IllegalArgumentException("Illegal fav_key");
+            throw new IllegalArgumentException("Illegal fav_value");
         UserFav userFav = userFavRepository.findUserFavByUser_Id(user_id);
         if(fav_key.equalsIgnoreCase("movies")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getMovies());
@@ -180,37 +180,36 @@ public class UserManagementService {
         if(fav_key == null || fav_key.isEmpty())
             throw new IllegalArgumentException("Illegal fav_key");
         if(fav_value == null || fav_value.isEmpty())
-            throw new IllegalArgumentException("Illegal fav_key");
+            throw new IllegalArgumentException("Illegal fav_value");
         UserFav userFav = userFavRepository.findUserFavByUser_Id(user_id);
         if(fav_key.equalsIgnoreCase("movies")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getMovies());
-            list.add(fav_value);
+            list.remove(fav_value);
             userFav.setMovies(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("actors")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getActors());
-            if(list.contains(fav_value))
-                list.add(fav_value);
+            list.remove(fav_value);
             userFav.setActors(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("books")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getBooks());
-            list.add(fav_value);
+            list.remove(fav_value);
             userFav.setBooks(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("songs")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getSongs());
-            list.add(fav_value);
+            list.remove(fav_value);
             userFav.setSongs(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("sports")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getSports());
-            list.add(fav_value);
+            list.remove(fav_value);
             userFav.setSports(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("sportsperson")){
             List<String> list = StringListConvertor.convertStringToList(userFav.getSportspersons());
-            list.add(fav_value);
+            list.remove(fav_value);
             userFav.setSportspersons(StringListConvertor.convertListToString(list));
         }
         if(fav_key.equalsIgnoreCase("places")){

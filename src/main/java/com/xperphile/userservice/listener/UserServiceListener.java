@@ -39,7 +39,7 @@ public class UserServiceListener {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RabbitListener(queues = {"postmessage.queue"})
+    @RabbitListener(queues = {"usermessage.queue"})
     public void receiveMessage(Map<String, Object> message) {
 
         Map<String, HttpMethod> methodMap = new HashMap<>();

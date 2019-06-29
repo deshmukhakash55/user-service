@@ -27,8 +27,6 @@ public class UserMessageService {
             throw new IllegalArgumentException("Illegal message_id");
         if(message == null || message.isEmpty())
             throw new IllegalArgumentException("Illegal message");
-        if(referred_message == null || referred_message.isEmpty())
-            throw new IllegalArgumentException("Illegal referred_message");
         String id = UUID.randomUUID().toString();
         Timestamp creation_time = new Timestamp(new Date().getTime());
         String status = "unread";
