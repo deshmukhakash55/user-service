@@ -60,7 +60,11 @@ public class UserServiceListener {
             File funnelMethodFile = ResourceUtils.getFile("classpath:" + UserConstants.USERMESSAGE_TO_FUNNELMETHOD_FILE);
             Map<String, String> funnelMethodMappings = (Map<String, String>)mapper.readValue(funnelMethodFile, Map.class);
 
-            final String uri = "http://localhost:" + environment.getProperty("server.port") + mappings.get(message.get("message"));
+            String pathVariables = "";
+            if(message.containsKey("pathVariables"))
+                pathVariables = message.get("pathVariables").toString();
+
+            final String uri = "http://localhost:" + environment.getProperty("server.port") + mappings.get(message.get("message")) + pathVariables;
             HttpEntity<Object> entity = new HttpEntity<>(message.get("requestEntity"));
 
             ResponseEntity<Object> responseEntity = restTemplate.exchange(uri, methodMap.get(message.get("method")), entity, new ParameterizedTypeReference<Object>() {

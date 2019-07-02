@@ -1,3 +1,12 @@
 {
-
+  "add_user" : "/user/add",
+  "update_user" : "/user/update",
+  "remove_user" : "/user/remove",
+  "follow_user" : "/user/mgmt/follow",
+  "unfollow_user" : "/user/mgmt/unfollow",
+  "block_user" : "/user/mgmt/block",
+  "unblock_user" : "/user/mgmt/unblock",
+  "add_fav" : "/user/mgmt/add/fav",
+  "rem_fav" : "/user/mgmt/remove/fav",
+  "add_user_message" : "/user/msg/add"
 }
